@@ -29,8 +29,9 @@ typedef NS_ENUM(NSUInteger, SNVideoLogoDirection) {
 @property (nonatomic, copy)   NSString  *outPutPath;//保存路径
 
 @property (nonatomic, assign) CGSize     renderSize;
-@property (nonatomic, strong) NSString  *outputFileType;//默认为mov
+@property (nonatomic, copy)   NSString  *outputFileType;//默认为mov
 @property (nonatomic, assign) BOOL       shouldOptimizeForNetworkUse; //默认为no
+@property (nonatomic, copy)   NSString  *presetName;//清晰度设置 例如：AVAssetExportPresetHighestQuality
 
 @property (nonatomic, assign) SNHVideoTransitionType videoTransitionType;//视频的转场动画
 

@@ -61,6 +61,10 @@
     return _datasArr;
 }
 
+- (NSString *)presetName {
+    return _presetName ? _presetName : AVAssetExportPresetHighestQuality;
+}
+
 #pragma mark - =================== export api===================
 - (void)loadAsset:(NSURL *)assetURL {
     
@@ -481,7 +485,7 @@
     //5.视频输出
     self.outputURL = [NSURL fileURLWithPath: self.outPutPath];
          //AVAssetExportPresetPassthrough,预设值,可以让我们在不需要重新对媒体编码的前提下实现写入数据的功能.导出预设用于确定导出内容的质量,大小等属性,用其他的会造成导出后的视频增大
-    AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:self.mixComposition presetName:AVAssetExportPresetHighestQuality];
+    AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:self.mixComposition presetName:self.presetName];
     
     exporter.outputURL = self.outputURL;
     exporter.videoComposition = self.videoComposition;

@@ -23,12 +23,6 @@
 		2A0B94051F2890B0009190F6 /* SNHScrollCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0B93F71F2890B0009190F6 /* SNHScrollCellView.m */; };
 		2A0B94061F2890B0009190F6 /* SNHVideoPartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0B93F91F2890B0009190F6 /* SNHVideoPartCell.m */; };
 		2A0B94071F2890B0009190F6 /* SNHVideoPartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A0B93FA1F2890B0009190F6 /* SNHVideoPartCell.xib */; };
-		2A0B94131F289103009190F6 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0B940B1F289103009190F6 /* MBProgressHUD.m */; };
-		2A0B94161F289103009190F6 /* ZYQAssetPicker.Bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2A0B940F1F289103009190F6 /* ZYQAssetPicker.Bundle */; };
-		2A0B94171F289103009190F6 /* ZYQAssetPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0B94111F289103009190F6 /* ZYQAssetPickerController.m */; };
-		2A0B94191F28972F009190F6 /* mov_bbb.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 2A0B94181F28972F009190F6 /* mov_bbb.mp4 */; };
-		2A0B941B1F289745009190F6 /* ping20s.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 2A0B941A1F289745009190F6 /* ping20s.mp4 */; };
-		2A0B941D1F28984A009190F6 /* back12@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A0B941C1F28984A009190F6 /* back12@2x.png */; };
 		2A3F13001F29C14400B710B6 /* SNHRulerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A3F12F81F29C14400B710B6 /* SNHRulerView.m */; };
 		2A3F13011F29C14400B710B6 /* SNHThumbView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A3F12FA1F29C14400B710B6 /* SNHThumbView.m */; };
 		2A3F13021F29C14400B710B6 /* SNHTimerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A3F12FC1F29C14400B710B6 /* SNHTimerView.m */; };
@@ -36,6 +30,12 @@
 		2ADD2A2D1F29DA490043B954 /* SNHVideoEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADD2A2C1F29DA490043B954 /* SNHVideoEditViewController.m */; };
 		2ADD2A311F29DE9F0043B954 /* NSString+TimeConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADD2A301F29DE9F0043B954 /* NSString+TimeConvert.m */; };
 		2ADD2A341F29E0150043B954 /* MBProgressHUD+SHN.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADD2A331F29E0150043B954 /* MBProgressHUD+SHN.m */; };
+		2ADD2A461F2B12600043B954 /* back12@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2ADD2A431F2B12600043B954 /* back12@2x.png */; };
+		2ADD2A471F2B12600043B954 /* mov_bbb.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 2ADD2A441F2B12600043B954 /* mov_bbb.mp4 */; };
+		2ADD2A481F2B12600043B954 /* ping20s.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 2ADD2A451F2B12600043B954 /* ping20s.mp4 */; };
+		2ADD2A501F2B126A0043B954 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADD2A4B1F2B126A0043B954 /* MBProgressHUD.m */; };
+		2ADD2A511F2B126A0043B954 /* ZYQAssetPicker.Bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2ADD2A4D1F2B126A0043B954 /* ZYQAssetPicker.Bundle */; };
+		2ADD2A521F2B126A0043B954 /* ZYQAssetPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADD2A4F1F2B126A0043B954 /* ZYQAssetPickerController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,14 +64,6 @@
 		2A0B93F81F2890B0009190F6 /* SNHVideoPartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNHVideoPartCell.h; sourceTree = "<group>"; };
 		2A0B93F91F2890B0009190F6 /* SNHVideoPartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SNHVideoPartCell.m; sourceTree = "<group>"; };
 		2A0B93FA1F2890B0009190F6 /* SNHVideoPartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SNHVideoPartCell.xib; sourceTree = "<group>"; };
-		2A0B940A1F289103009190F6 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
-		2A0B940B1F289103009190F6 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		2A0B940F1F289103009190F6 /* ZYQAssetPicker.Bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZYQAssetPicker.Bundle; sourceTree = "<group>"; };
-		2A0B94101F289103009190F6 /* ZYQAssetPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYQAssetPickerController.h; sourceTree = "<group>"; };
-		2A0B94111F289103009190F6 /* ZYQAssetPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYQAssetPickerController.m; sourceTree = "<group>"; };
-		2A0B94181F28972F009190F6 /* mov_bbb.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = mov_bbb.mp4; sourceTree = "<group>"; };
-		2A0B941A1F289745009190F6 /* ping20s.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ping20s.mp4; sourceTree = "<group>"; };
-		2A0B941C1F28984A009190F6 /* back12@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back12@2x.png"; sourceTree = "<group>"; };
 		2A3F12F71F29C14400B710B6 /* SNHRulerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNHRulerView.h; sourceTree = "<group>"; };
 		2A3F12F81F29C14400B710B6 /* SNHRulerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SNHRulerView.m; sourceTree = "<group>"; };
 		2A3F12F91F29C14400B710B6 /* SNHThumbView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNHThumbView.h; sourceTree = "<group>"; };
@@ -87,6 +79,14 @@
 		2ADD2A301F29DE9F0043B954 /* NSString+TimeConvert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TimeConvert.m"; sourceTree = "<group>"; };
 		2ADD2A321F29E0150043B954 /* MBProgressHUD+SHN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+SHN.h"; sourceTree = "<group>"; };
 		2ADD2A331F29E0150043B954 /* MBProgressHUD+SHN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+SHN.m"; sourceTree = "<group>"; };
+		2ADD2A431F2B12600043B954 /* back12@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back12@2x.png"; sourceTree = "<group>"; };
+		2ADD2A441F2B12600043B954 /* mov_bbb.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = mov_bbb.mp4; sourceTree = "<group>"; };
+		2ADD2A451F2B12600043B954 /* ping20s.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ping20s.mp4; sourceTree = "<group>"; };
+		2ADD2A4A1F2B126A0043B954 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		2ADD2A4B1F2B126A0043B954 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		2ADD2A4D1F2B126A0043B954 /* ZYQAssetPicker.Bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZYQAssetPicker.Bundle; sourceTree = "<group>"; };
+		2ADD2A4E1F2B126A0043B954 /* ZYQAssetPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYQAssetPickerController.h; sourceTree = "<group>"; };
+		2ADD2A4F1F2B126A0043B954 /* ZYQAssetPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYQAssetPickerController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,12 +119,9 @@
 		2A0B93C61F28908D009190F6 /* SNHVideoEditorTool */ = {
 			isa = PBXGroup;
 			children = (
+				2ADD2A421F2B12380043B954 /* Librarys */,
+				2ADD2A411F2B12100043B954 /* Resources */,
 				2ADD2A2E1F29DE760043B954 /* Category */,
-				2A0B941C1F28984A009190F6 /* back12@2x.png */,
-				2A0B941A1F289745009190F6 /* ping20s.mp4 */,
-				2A0B94181F28972F009190F6 /* mov_bbb.mp4 */,
-				2A0B94081F289103009190F6 /* MBProgressHUD */,
-				2A0B940D1F289103009190F6 /* ZYQAssetPickerController */,
 				2A0B93DE1F2890B0009190F6 /* VideoEditor */,
 				2A0B93CA1F28908D009190F6 /* AppDelegate.h */,
 				2A0B93CB1F28908D009190F6 /* AppDelegate.m */,
@@ -228,25 +225,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		2A0B94081F289103009190F6 /* MBProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				2A0B940A1F289103009190F6 /* MBProgressHUD.h */,
-				2A0B940B1F289103009190F6 /* MBProgressHUD.m */,
-			);
-			path = MBProgressHUD;
-			sourceTree = "<group>";
-		};
-		2A0B940D1F289103009190F6 /* ZYQAssetPickerController */ = {
-			isa = PBXGroup;
-			children = (
-				2A0B940F1F289103009190F6 /* ZYQAssetPicker.Bundle */,
-				2A0B94101F289103009190F6 /* ZYQAssetPickerController.h */,
-				2A0B94111F289103009190F6 /* ZYQAssetPickerController.m */,
-			);
-			path = ZYQAssetPickerController;
-			sourceTree = "<group>";
-		};
 		2ADD2A2E1F29DE760043B954 /* Category */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,6 +234,44 @@
 				2ADD2A331F29E0150043B954 /* MBProgressHUD+SHN.m */,
 			);
 			path = Category;
+			sourceTree = "<group>";
+		};
+		2ADD2A411F2B12100043B954 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2ADD2A431F2B12600043B954 /* back12@2x.png */,
+				2ADD2A441F2B12600043B954 /* mov_bbb.mp4 */,
+				2ADD2A451F2B12600043B954 /* ping20s.mp4 */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		2ADD2A421F2B12380043B954 /* Librarys */ = {
+			isa = PBXGroup;
+			children = (
+				2ADD2A491F2B126A0043B954 /* MBProgressHUD */,
+				2ADD2A4C1F2B126A0043B954 /* ZYQAssetPickerController */,
+			);
+			path = Librarys;
+			sourceTree = "<group>";
+		};
+		2ADD2A491F2B126A0043B954 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				2ADD2A4A1F2B126A0043B954 /* MBProgressHUD.h */,
+				2ADD2A4B1F2B126A0043B954 /* MBProgressHUD.m */,
+			);
+			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		2ADD2A4C1F2B126A0043B954 /* ZYQAssetPickerController */ = {
+			isa = PBXGroup;
+			children = (
+				2ADD2A4D1F2B126A0043B954 /* ZYQAssetPicker.Bundle */,
+				2ADD2A4E1F2B126A0043B954 /* ZYQAssetPickerController.h */,
+				2ADD2A4F1F2B126A0043B954 /* ZYQAssetPickerController.m */,
+			);
+			path = ZYQAssetPickerController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -317,18 +333,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A0B94191F28972F009190F6 /* mov_bbb.mp4 in Resources */,
 				2A0B93D71F28908D009190F6 /* LaunchScreen.storyboard in Resources */,
-				2A0B94161F289103009190F6 /* ZYQAssetPicker.Bundle in Resources */,
 				2A0B94071F2890B0009190F6 /* SNHVideoPartCell.xib in Resources */,
 				2A0B93FF1F2890B0009190F6 /* videoEditor_play_h@3x.png in Resources */,
+				2ADD2A481F2B12600043B954 /* ping20s.mp4 in Resources */,
 				2A0B93D41F28908D009190F6 /* Assets.xcassets in Resources */,
 				2A0B93FC1F2890B0009190F6 /* videoEditor_delete@2x.png in Resources */,
 				2A0B93FD1F2890B0009190F6 /* videoEditor_delete@3x.png in Resources */,
-				2A0B941B1F289745009190F6 /* ping20s.mp4 in Resources */,
-				2A0B941D1F28984A009190F6 /* back12@2x.png in Resources */,
 				2A0B93FE1F2890B0009190F6 /* videoEditor_play_h@2x.png in Resources */,
+				2ADD2A471F2B12600043B954 /* mov_bbb.mp4 in Resources */,
+				2ADD2A461F2B12600043B954 /* back12@2x.png in Resources */,
 				2A0B93D21F28908D009190F6 /* Main.storyboard in Resources */,
+				2ADD2A511F2B126A0043B954 /* ZYQAssetPicker.Bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,14 +357,13 @@
 			files = (
 				2A0B93CF1F28908D009190F6 /* ViewController.m in Sources */,
 				2A0B94011F2890B0009190F6 /* SNHVideoModel.m in Sources */,
+				2ADD2A521F2B126A0043B954 /* ZYQAssetPickerController.m in Sources */,
 				2A3F13031F29C14400B710B6 /* SNHVideoTrimmerView.m in Sources */,
 				2A3F13021F29C14400B710B6 /* SNHTimerView.m in Sources */,
 				2A0B94051F2890B0009190F6 /* SNHScrollCellView.m in Sources */,
 				2A3F13001F29C14400B710B6 /* SNHRulerView.m in Sources */,
 				2A0B94061F2890B0009190F6 /* SNHVideoPartCell.m in Sources */,
-				2A0B94171F289103009190F6 /* ZYQAssetPickerController.m in Sources */,
 				2A0B93CC1F28908D009190F6 /* AppDelegate.m in Sources */,
-				2A0B94131F289103009190F6 /* MBProgressHUD.m in Sources */,
 				2A0B94001F2890B0009190F6 /* SNHVideoEditor.m in Sources */,
 				2ADD2A341F29E0150043B954 /* MBProgressHUD+SHN.m in Sources */,
 				2ADD2A2D1F29DA490043B954 /* SNHVideoEditViewController.m in Sources */,
@@ -356,6 +371,7 @@
 				2A3F13011F29C14400B710B6 /* SNHThumbView.m in Sources */,
 				2A0B93C91F28908D009190F6 /* main.m in Sources */,
 				2A0B93FB1F2890B0009190F6 /* SNHVideoTrimmerController.m in Sources */,
+				2ADD2A501F2B126A0043B954 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
