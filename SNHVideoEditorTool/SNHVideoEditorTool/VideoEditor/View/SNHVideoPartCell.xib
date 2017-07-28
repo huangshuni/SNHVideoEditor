@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="SNHVideoPartCell">
+            <rect key="frame" x="0.0" y="0.0" width="88" height="94"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="88" height="94"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6jH-AO-MXA">
+                        <rect key="frame" x="10" y="10" width="68" height="74"/>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KMK-XN-uRc">
+                        <rect key="frame" x="68" y="0.0" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="2es-q1-bXD"/>
+                            <constraint firstAttribute="height" constant="20" id="ubo-QS-wah"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" image="videoEditor_delete.png"/>
+                        <connections>
+                            <action selector="deleteVideoPartAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Z38-4I-1Ku"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="6jH-AO-MXA" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="0ds-I2-cGr"/>
+                <constraint firstItem="KMK-XN-uRc" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="6hR-gg-ssO"/>
+                <constraint firstAttribute="trailing" secondItem="6jH-AO-MXA" secondAttribute="trailing" constant="10" id="FsD-yD-Zku"/>
+                <constraint firstItem="6jH-AO-MXA" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="M8b-ms-w2z"/>
+                <constraint firstAttribute="trailing" secondItem="KMK-XN-uRc" secondAttribute="trailing" id="PAd-Uf-Y1J"/>
+                <constraint firstAttribute="bottom" secondItem="6jH-AO-MXA" secondAttribute="bottom" constant="10" id="upt-B1-gbB"/>
+            </constraints>
+            <size key="customSize" width="88" height="94"/>
+            <connections>
+                <outlet property="deleteBtn" destination="KMK-XN-uRc" id="lXA-WD-9O5"/>
+                <outlet property="snapImage" destination="6jH-AO-MXA" id="nKd-rv-YNG"/>
+            </connections>
+            <point key="canvasLocation" x="53" y="101"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="videoEditor_delete.png" width="20" height="20"/>
+    </resources>
+</document>
