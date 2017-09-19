@@ -3,7 +3,7 @@
 //  test视频拼接剪切
 //
 //  Created by huangshuni on 2017/7/18.
-//  Copyright © 2017年 黄淑妮. All rights reserved.
+//  Copyright © 2017年 Niusee.inc. All rights reserved.
 //
 
 #import "SNHVideoEditor.h"
@@ -88,7 +88,7 @@
 //}
 
 - (void)loadAssetUrls:(NSArray *)assetURLArr {
-
+    
     for (NSURL *url in assetURLArr) {
         SNHVideoModel *model = [[SNHVideoModel alloc]init];
         model.assetUrl = url;
@@ -97,13 +97,13 @@
 }
 
 - (void)loadAssetModels:(NSArray <SNHVideoModel *> *)assetModelArr {
-
+    
     self.datasArr = [NSMutableArray arrayWithArray:assetModelArr];
 }
 
 
 - (void)loadAssetWithBGM:(NSURL *)videoAssetURL bgAssetURL:(NSURL *)bgAssetURL {
-
+    
 }
 
 
@@ -124,13 +124,13 @@
     [parentLayer addSublayer:overlayLayer];
     
     self.videoComposition.animationTool = [AVVideoCompositionCoreAnimationTool
-                                        videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:videoLayer inLayer:parentLayer];
+                                           videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:videoLayer inLayer:parentLayer];
     
 }
 
 
 - (void)addLogoInDirection:(SNVideoLogoDirection)direction {
-
+    
     self.logoDirection = direction;
 }
 
@@ -139,7 +139,7 @@
 #pragma mark - =================== define ===================
 #pragma mark - 1.初始化通道
 - (void)initialHandle {
-
+    
     //Step 1
     self.mixComposition = [[AVMutableComposition alloc] init];
     
@@ -162,7 +162,7 @@
                                                                   preferredTrackID:
                                   kCMPersistentTrackID_Invalid];
     }
-   
+    
     
 }
 
@@ -203,8 +203,8 @@
 
 #pragma mark ---插入原始音视频
 - (void)combineOrginalVideoAndAudio:(NSArray *)assetModelsArr
-            WithFailureBlock:(void (^)(NSError *error))failureBlock{
-
+                   WithFailureBlock:(void (^)(NSError *error))failureBlock{
+    
     //Step 2
     CMTime totalDuration = kCMTimeZero;
     
@@ -253,9 +253,9 @@
         //淡入淡出效果
         CMTimeRange transTimeRange;
         if (i == 0) {
-            transTimeRange = CMTimeRangeMake(CMTimeMakeWithSeconds(0, EDIT_VIDEO_FPS), CMTimeMakeWithSeconds(model.endTime - model.beginTime, EDIT_VIDEO_FPS));
+            transTimeRange = CMTimeRangeMake(CMTimeMakeWithSeconds(model.beginTime, EDIT_VIDEO_FPS), CMTimeMakeWithSeconds(model.endTime - model.beginTime, EDIT_VIDEO_FPS));
         }else {
-            transTimeRange = CMTimeRangeMake(CMTimeMakeWithSeconds(animationDur, EDIT_VIDEO_FPS), CMTimeMakeWithSeconds(model.endTime - model.beginTime - animationDur, EDIT_VIDEO_FPS));
+            transTimeRange = CMTimeRangeMake(CMTimeMakeWithSeconds(model.beginTime + animationDur, EDIT_VIDEO_FPS), CMTimeMakeWithSeconds(model.endTime - model.beginTime - animationDur, EDIT_VIDEO_FPS));
         }
         
         [self insertAudioOriginalWithAsset:asset audioTrack:self.transAudioTrack timeRange:transTimeRange startTime:transTotalDuration failureBlock:^(NSError *error) {
@@ -282,7 +282,7 @@
         
         
         //背景淡入淡出
-        CMTimeRange transBgTimeRange = CMTimeRangeMake(CMTimeMakeWithSeconds(0, EDIT_VIDEO_FPS), CMTimeMakeWithSeconds(model.endTime - model.beginTime - animationDur, EDIT_VIDEO_FPS));
+        CMTimeRange transBgTimeRange = CMTimeRangeMake(CMTimeMakeWithSeconds(model.beginTime, EDIT_VIDEO_FPS), CMTimeMakeWithSeconds(model.endTime - model.beginTime - animationDur, EDIT_VIDEO_FPS));
         [self insertVideoOriginalWithAsset:asset videoTrack:self.transVideoBgTrack timeRange:transBgTimeRange startTime:transBgTotalDuration failureBlock:^(NSError *error) {
             if (failureBlock) {
                 failureBlock(error);
@@ -302,21 +302,21 @@
                            timeRange:(CMTimeRange)timeRange
                            startTime:(CMTime)totalDuration
                         failureBlock:(void (^)(NSError *error))failureBlock {
-
+    
     //向音频通道内加入音频
     NSError *erroraudio = nil;
     AVAssetTrack *assetAudioTrack = [[asset tracksWithMediaType:AVMediaTypeAudio] firstObject];
     BOOL ba = [audioTrack insertTimeRange:timeRange
-                                       ofTrack:assetAudioTrack
-                                        atTime:totalDuration
-                                         error:&erroraudio];
+                                  ofTrack:assetAudioTrack
+                                   atTime:totalDuration
+                                    error:&erroraudio];
     if (!ba) {
         NSLog(@"erroraudio:%@%d",erroraudio,ba);
         if (failureBlock) {
             failureBlock(erroraudio);
         }
     }
-
+    
 }
 
 #pragma mark ---插入视频操作
@@ -325,15 +325,15 @@
                            timeRange:(CMTimeRange)timeRange
                            startTime:(CMTime)totalDuration
                         failureBlock:(void (^)(NSError *error))failureBlock{
-
+    
     //向视频通道内加入视频
     NSError *errorVideo = nil;
     //获取AVAsset中的视频
     AVAssetTrack *assetVideoTrack = [[asset tracksWithMediaType:AVMediaTypeVideo]firstObject];
     BOOL bl = [videoTrack insertTimeRange:timeRange
-                                       ofTrack:assetVideoTrack
-                                        atTime:totalDuration
-                                         error:&errorVideo];
+                                  ofTrack:assetVideoTrack
+                                   atTime:totalDuration
+                                    error:&errorVideo];
     if (!bl) {
         NSLog(@"errorVideo:%@%d",errorVideo,bl);
         if (failureBlock) {
@@ -347,7 +347,7 @@
 
 #pragma mark 3.调整输出视频的属性
 - (void)ajustOutputVideoProperty {
-
+    
     // Step 3:调整输出视频的属性
     self.videoComposition = [AVMutableVideoComposition videoComposition];
     
@@ -370,7 +370,7 @@
         SNHVideoModel *model = self.datasArr[0];
         AVAsset *asset = [AVAsset assetWithURL:model.assetUrl];
         videoTransForm = [self fixVideoTransformFromAssert:asset];
-       
+        
     }else {
         videoTransForm = self.videoTrack.preferredTransform;
     }
@@ -387,19 +387,19 @@
         
         //创建视频图层指令
         AVMutableVideoCompositionLayerInstruction * avMutableVideoCompositionLayerInstruction = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:self.videoTrack];
-         [avMutableVideoCompositionLayerInstruction setTransform:videoTransForm atTime:kCMTimeZero];
+        [avMutableVideoCompositionLayerInstruction setTransform:videoTransForm atTime:kCMTimeZero];
         //把视频图层指令放到视频指令中，再放入视频组合对象中
         avMutableVideoCompositionInstruction.layerInstructions = [NSArray arrayWithObject:avMutableVideoCompositionLayerInstruction];
         self.videoComposition.instructions = [NSArray arrayWithObject:avMutableVideoCompositionInstruction];
         
     }else if(self.videoTransitionType == SNHVideoTransitionTypeFadeInOut){
-       
+        
         //创建视频图层指令
         AVMutableVideoCompositionLayerInstruction * avMutableVideoCompositionLayerInstruction = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:self.transVideoTrack];
-         [avMutableVideoCompositionLayerInstruction setTransform:videoTransForm atTime:kCMTimeZero];
+        [avMutableVideoCompositionLayerInstruction setTransform:videoTransForm atTime:kCMTimeZero];
         //创建视频图层指令bg
         AVMutableVideoCompositionLayerInstruction * avMutableVideoCompositionLayerInstruction1 = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:self.transVideoBgTrack];
-         [avMutableVideoCompositionLayerInstruction1 setTransform:videoTransForm atTime:kCMTimeZero];
+        [avMutableVideoCompositionLayerInstruction1 setTransform:videoTransForm atTime:kCMTimeZero];
         
         CMTime totalTime = kCMTimeZero;
         for (int i = 0; i < self.datasArr.count - 1; i++) {
@@ -444,7 +444,7 @@
     [overlayLayer setContents:(id)[animationImage CGImage]];
     [overlayLayer setMasksToBounds:YES];
     
-   
+    
     CALayer *parentLayer = [CALayer layer];
     CALayer *videoLayer = [CALayer layer];
     parentLayer.frame = CGRectMake(0, 0, videoSize.width, videoSize.height);
@@ -461,7 +461,7 @@
 #pragma mark 5.导出视频
 - (void)exportVideoAsynchronouslyWithSuccessBlock:(void (^)(NSURL *outputURL))successBlock
                                      failureBlock:(void (^)(NSError *error))failureBlock {
-
+    
     //0.初始化通道信息
     [self initialHandle];
     
@@ -473,7 +473,7 @@
         }
     }];
     
-   
+    
     //2.设置输出视频的属性（大小转像输出类型等）
     [self ajustOutputVideoProperty];
     
@@ -484,7 +484,7 @@
     
     //5.视频输出
     self.outputURL = [NSURL fileURLWithPath: self.outPutPath];
-         //AVAssetExportPresetPassthrough,预设值,可以让我们在不需要重新对媒体编码的前提下实现写入数据的功能.导出预设用于确定导出内容的质量,大小等属性,用其他的会造成导出后的视频增大
+    //AVAssetExportPresetPassthrough,预设值,可以让我们在不需要重新对媒体编码的前提下实现写入数据的功能.导出预设用于确定导出内容的质量,大小等属性,用其他的会造成导出后的视频增大
     AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:self.mixComposition presetName:self.presetName];
     
     exporter.outputURL = self.outputURL;
@@ -507,7 +507,7 @@
             }
         });
     }];
-
+    
 }
 
 #pragma mark - =================== tools ===================
@@ -582,16 +582,16 @@
 
 /**
  获取视频任意时间的图像
-
+ 
  @param videoURL 视频的NSURL地址
  @param time 获取那一时刻的图片
  @param successBlock 成功回调
  @param failureBlock 失败回调
  */
 + (void)thumbnailImageForVideo:(NSURL *)videoURL
-                             atTime:(CGFloat)time
-                       successBlock:(void(^)(UIImage *image))successBlock
-                       failureBlock:(void(^)(NSError *error))failureBlock{
+                        atTime:(CGFloat)time
+                  successBlock:(void(^)(UIImage *image))successBlock
+                  failureBlock:(void(^)(NSError *error))failureBlock{
     
     AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:videoURL options:nil];
     
@@ -629,7 +629,7 @@
 - (CGSize)fixRenderSizeWithAsset:(AVAsset *)videoAsset{
     
     NSInteger degrees = [self degressFromVideoFileWithAsset:videoAsset];
-
+    
     NSArray *tracks = [videoAsset tracksWithMediaType:AVMediaTypeVideo];
     AVAssetTrack *videoTrack = [tracks objectAtIndex:0];
     

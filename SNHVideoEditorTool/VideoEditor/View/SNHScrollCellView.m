@@ -47,6 +47,22 @@ static NSString *SNHVideoPartCellId = @"SNHVideoPartCellId";
     [self addSubview:self.collectionView];
 }
 
+//移动数据源
+- (void)removeObjectFrom:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    
+    //取出源item数据
+    id objc = [_datasArr objectAtIndex:sourceIndexPath.item];
+    //从资源数组中移除该数据
+    [_datasArr removeObject:objc];
+    //将数据插入到资源数组中的目标位置上
+    [_datasArr insertObject:objc atIndex:destinationIndexPath.item];
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(SNHScrollCellViewDidMoveItemAtIndexPath:toIndexPath:)]) {
+        [self.delegate SNHScrollCellViewDidMoveItemAtIndexPath:sourceIndexPath toIndexPath:destinationIndexPath];
+    }
+    
+}
+
 #pragma mark - =================== gesture ===================
 - (void)handlelongGesture:(UILongPressGestureRecognizer *)longGesture {
     
@@ -85,6 +101,8 @@ static NSString *SNHVideoPartCellId = @"SNHVideoPartCellId";
                 if (notsureIndexPath != _currentIndexPath && notsureIndexPath.section == _currentIndexPath.section) {
                     
                     [self.collectionView moveItemAtIndexPath:_currentIndexPath toIndexPath:notsureIndexPath];
+                    //移动数据源
+                    [self removeObjectFrom:_currentIndexPath toIndexPath:notsureIndexPath];
                     UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:notsureIndexPath];
                     cell.alpha = 0.0;
                     _currentIndexPath = notsureIndexPath;
@@ -93,7 +111,7 @@ static NSString *SNHVideoPartCellId = @"SNHVideoPartCellId";
             
             break;
         case UIGestureRecognizerStateEnded:
-
+            
             if (_currentIndexPath != nil) {
                 UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:_currentIndexPath];
                 [UIView animateWithDuration:0.25 animations:^{
@@ -109,7 +127,7 @@ static NSString *SNHVideoPartCellId = @"SNHVideoPartCellId";
             
             break;
         default:
-
+            
             break;
     }
 }
@@ -119,7 +137,7 @@ static NSString *SNHVideoPartCellId = @"SNHVideoPartCellId";
 #pragma mark UICollectionViewDelegate/DataSource/DelegateFlowLayout
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-
+    
     return self.datasArr.count;
 }
 
@@ -129,8 +147,8 @@ static NSString *SNHVideoPartCellId = @"SNHVideoPartCellId";
     cell.snapImage.image = model.videoImage;
     
     cell.deleteBlcok = ^{
-        if (self.deleteBlock) {
-            self.deleteBlock(indexPath);
+        if (self.delegate && [self.delegate respondsToSelector:@selector(SNHScrollCellViewDidDeleteItem:)]) {
+            [self.delegate SNHScrollCellViewDidDeleteItem:indexPath];
         }
     };
     
@@ -149,6 +167,10 @@ static NSString *SNHVideoPartCellId = @"SNHVideoPartCellId";
     [_datasArr removeObject:objc];
     //将数据插入到资源数组中的目标位置上
     [_datasArr insertObject:objc atIndex:destinationIndexPath.item];
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(SNHScrollCellViewDidMoveItemAtIndexPath:toIndexPath:)]) {
+        [self.delegate SNHScrollCellViewDidMoveItemAtIndexPath:sourceIndexPath toIndexPath:destinationIndexPath];
+    }
 }
 
 #pragma mark - =================== setter/getter ===================
@@ -174,7 +196,9 @@ static NSString *SNHVideoPartCellId = @"SNHVideoPartCellId";
 }
 
 -(void)setDatasArr:(NSMutableArray *)datasArr {
-    _datasArr = datasArr;
+    
+    //注意深拷贝和浅拷贝
+    _datasArr = [datasArr mutableCopy];
     [self.collectionView reloadData];
 }
 

@@ -15,13 +15,26 @@
 #import "NSString+TimeConvert.h"
 #import "MBProgressHUD+SHN.h"
 
+#ifdef DEBUG
+
+#define NSLog(FORMAT, ...) fprintf(stderr, "%s:%zd\t%s\n", [[[NSString stringWithUTF8String: __FILE__] lastPathComponent] UTF8String], __LINE__, [[NSString stringWithFormat: FORMAT, ## __VA_ARGS__] UTF8String]);
+
+#else
+
+#define NSLog(FORMAT, ...) nil
+
+#endif
+
+
 #define WS(weakSelf)  __weak __typeof(&*self)weakSelf = self
 #define SCREEN_WIDTH  ([UIScreen mainScreen].bounds.size.width)
 #define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
 
 #define DocumentPath ([NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject])
 
-@interface SNHVideoTrimmerController ()<SNHVideoTrimmerDelegate>
+#define RGBColor(r,g,b,a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:a]
+
+@interface SNHVideoTrimmerController ()<SNHVideoTrimmerDelegate,SNHScrollCellViewDelegate>
 
 @property (strong, nonatomic) UIView *videoPlayerView;
 @property (strong, nonatomic) UIView *videoTrimmerBgView;
@@ -125,7 +138,7 @@
     self.trimmerView = [[SNHVideoTrimmerView alloc] init];
     self.trimmerView.frame = self.videoTrimmerBgView.bounds;
     [self.videoTrimmerBgView addSubview:self.trimmerView];
-    [self.trimmerView setThemeColor:[UIColor lightGrayColor]];
+    [self.trimmerView setThemeColor:RGBColor(38, 184, 242, 1.0)];
     [self.trimmerView setAsset:self.asset];
     [self.trimmerView setShowsRulerView:NO];
     [self.trimmerView setShowsTimerView:YES];
@@ -203,6 +216,7 @@
     }
 }
 
+
 #pragma mark - PlaybackTimeCheckerTimer
 
 - (void)onPlaybackTimeCheckerTimer
@@ -274,8 +288,6 @@
             [MBProgressHUD hideHUDForView:ws.view animated:YES];
             SNHVideoModel *model = [[SNHVideoModel alloc] init];
             model.assetUrl = outputURL;
-            model.beginTime = self.startTime;
-            model.endTime = self.stopTime;
             model.videoImage = image;
             [ws.videoPartsArr addObject:model];
             
@@ -323,9 +335,19 @@
         model.endTime = CMTimeGetSeconds([[AVAsset assetWithURL:outputURL] duration]);
         NSArray *arr = [NSArray arrayWithObject:model];
         
-        SNHVideoEditViewController *vc = [[SNHVideoEditViewController alloc] init];
-        vc.urlsArr = arr;
-        [self.navigationController pushViewController:vc animated:NO];
+        WS(ws);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            SNHVideoEditViewController *vc = [[SNHVideoEditViewController alloc] init];
+            vc.urlsArr = arr;
+            [ws.navigationController pushViewController:vc animated:NO];
+        });
+        
+        [editor writeVideoToPhotoLibraryWithSuccess:^{
+            NSLog(@"保存成功");
+        } failure:^(NSError *error) {
+            NSLog(@"保存失败");
+        }];
+       
         
     } failureBlock:^(NSError *error) {
          NSLog(@"merge failure");
@@ -378,15 +400,11 @@
     self.videoTrimmerBgView = [[UIView alloc] initWithFrame:CGRectMake(10, self.mergeBtn.frame.origin.y  - 50 - 60, SCREEN_WIDTH - 20, 60)];
     [self.view addSubview:self.videoTrimmerBgView];
     
-    WS(ws);
     CGFloat scrollCellViewH = (SCREEN_WIDTH - 10*2 - 10*3)/4 + 20;
     self.scrollCellView = [[SNHScrollCellView alloc] initWithFrame:CGRectMake(0, self.videoTrimmerBgView.frame.origin.y - 40 - scrollCellViewH, SCREEN_WIDTH, scrollCellViewH)];
     self.scrollCellView.collectionView.backgroundColor = [UIColor blackColor];
+    self.scrollCellView.delegate = self;
     [self.view addSubview:self.scrollCellView];
-    //block action
-    self.scrollCellView.deleteBlock = ^(NSIndexPath *indexPath) {
-        [ws deleteVideoPart:indexPath];
-    };
     
     self.videoPlayerView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(titlelable.frame) + 20, SCREEN_WIDTH, self.scrollCellView.frame.origin.y - (CGRectGetMaxY(titlelable.frame) + 20) - 50)];
     self.videoPlayerView.backgroundColor = [UIColor blackColor];
@@ -419,6 +437,22 @@
     self.stopTime = endTime;
     
 }
+
+#pragma mark NCMScrollCellViewDelegate
+- (void)SNHScrollCellViewDidDeleteItem:(NSIndexPath *)indexPath {
+    [self deleteVideoPart:indexPath];
+}
+
+- (void)SNHScrollCellViewDidMoveItemAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    //取出源item数据
+    SNHVideoModel *objc = [self.videoPartsArr objectAtIndex:sourceIndexPath.item];
+    //从资源数组中移除该数据
+    [self.videoPartsArr removeObject:objc];
+    //将数据插入到资源数组中的目标位置上
+    [self.videoPartsArr insertObject:objc atIndex:destinationIndexPath.item];
+    
+}
+
 
 #pragma mark - =================== setter/getter ===================
 -(NSMutableArray *)videoPartsArr {

@@ -22,11 +22,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FVw-fn-Chc">
-                                <rect key="frame" x="153" y="140" width="68" height="30"/>
+                                <rect key="frame" x="96" y="140" width="182" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="edit video"/>
+                                <state key="normal" title="edit video from fixed video"/>
                                 <connections>
                                     <action selector="selectFromAlbum:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WNh-Pj-RxZ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZTh-z0-LGj">
+                                <rect key="frame" x="87" y="327" width="201" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="select video from local album"/>
+                                <connections>
+                                    <action selector="selectVideoFromLocal:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Pmq-1k-qDZ"/>
                                 </connections>
                             </button>
                         </subviews>

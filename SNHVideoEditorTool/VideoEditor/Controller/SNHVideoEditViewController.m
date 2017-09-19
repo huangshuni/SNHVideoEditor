@@ -21,6 +21,8 @@
 @property (nonatomic, strong) AVPlayerLayer *playerLayer;
 @property (nonatomic, strong) AVAsset *asset;
 
+@property (nonatomic, strong) NSObject *playbackTimeObserver;
+
 @property (nonatomic, strong) UISlider *timeSlider;
 
 @end
@@ -33,6 +35,7 @@
     // Do any additional setup after loading the view.
     
     [self setupUI];
+    [self addPlayObserver];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -69,15 +72,67 @@
     
     self.timeSlider = [[UISlider alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.playerLayer.frame), SCREEN_WIDTH - 20, 30)];
     [self.timeSlider addTarget:self action:@selector(timeSliderValueChange:) forControlEvents:UIControlEventValueChanged];
+    [self.timeSlider setThumbImage:[self thumbImage] forState:UIControlStateNormal];
     self.timeSlider.maximumValue = model.endTime - model.beginTime;
     self.timeSlider.minimumTrackTintColor = [UIColor orangeColor];
     [self.view addSubview:self.timeSlider];
-   
+    
 }
 
+
+- (UIImage *)thumbImage{
+
+    CGSize size = CGSizeMake(20, 20);
+    UIGraphicsBeginImageContext(size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    UIColor *whiteColor = [UIColor whiteColor];
+    CGContextSetFillColorWithColor(context, [whiteColor CGColor]);
+    CGContextFillEllipseInRect(context, CGRectMake(0, 0, 20, 20));
+    
+    UIColor *innerColor = [UIColor orangeColor];
+    CGContextSetFillColorWithColor(context, [innerColor CGColor]);
+    CGContextFillEllipseInRect(context, CGRectMake(5, 5, 10, 10));
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
+#pragma mark 添加观察者
+- (void)addPlayObserver{
+    [self.playerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
+}
+
+- (void)removeObserver {
+    [self.playerItem removeObserver:self forKeyPath:@"status"];
+    self.playbackTimeObserver = nil;
+}
+
+- (void)monitoringPlayback:(AVPlayerItem *)playerItem {
+    WS(ws);
+    self.playbackTimeObserver = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1, 1) queue:NULL usingBlock:^(CMTime time) {
+        CGFloat currentTime = CMTimeGetSeconds(playerItem.currentTime);
+        [ws.timeSlider setValue:currentTime];
+    }];
+}
+
+#pragma mark 返回
 - (void)backAction {
     
     [self.navigationController popViewControllerAnimated:NO];
+    [self removeObserver];
+}
+
+#pragma mark - =================== observer ===================
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"status"]) {
+        AVPlayerItem *playerItem = (AVPlayerItem *)object;
+        if ([playerItem status] == AVPlayerItemStatusReadyToPlay) {
+             [self monitoringPlayback:self.playerItem];// 监听播放状态
+        }
+    }
 }
 
 #pragma mark - =================== 滑动时间条 ===================

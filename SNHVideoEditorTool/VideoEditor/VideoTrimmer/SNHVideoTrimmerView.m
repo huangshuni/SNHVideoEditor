@@ -10,6 +10,7 @@
 #import "SNHThumbView.h"
 #import "SNHRulerView.h"
 #import "SNHTimerView.h"
+#import "MBProgressHUD.h"
 
 @interface HitTestView : UIView
 @property (assign, nonatomic) UIEdgeInsets hitTestEdgeInsets;
@@ -222,6 +223,13 @@
     // width for left and right overlay views
     self.overlayWidth =  CGRectGetWidth(self.frame) - (self.minLength * self.widthPerSecond);
     
+    
+    //hsn:如果视频总时长小于视频剪切的最小时长（self.minLength）
+    Float64 duration = CMTimeGetSeconds([self.asset duration]);
+    if (duration < self.minLength) {
+        self.overlayWidth =  CGRectGetWidth(self.frame) - (duration * self.widthPerSecond);
+    }
+    
     //左边覆盖层:半透明的view
     // add left overlay view
     self.leftOverlayView = [[HitTestView alloc] initWithFrame:CGRectMake(self.thumbWidth - self.overlayWidth, self.frameView.frame.origin.y, self.overlayWidth, CGRectGetHeight(self.frameView.frame))];
@@ -281,6 +289,28 @@
     [self.bottomBorder setFrame:CGRectMake(CGRectGetMaxX(self.leftOverlayView.frame), CGRectGetMaxY(self.frameView.frame)-height, CGRectGetMinX(self.rightOverlayView.frame)-CGRectGetMaxX(self.leftOverlayView.frame), height)];
 }
 
+#pragma mark 不能裁剪得更小的提示
+- (void)showNoSmallerTrimMessage {
+    
+    BOOL has = NO;
+    UIWindow *window = [[UIApplication sharedApplication].windows lastObject];
+    for (UIView *view in window.subviews) {
+        if ([view isKindOfClass:[MBProgressHUD class]]) {
+            has = YES;
+        }
+    }
+    if (has == NO) {
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:window animated:YES];
+        hud.mode = MBProgressHUDModeText;
+        hud.label.text = @"不能再裁剪得更小了";
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUDForView:window animated:YES];
+        });
+    }
+    
+}
+
+
 #pragma mark - =================== 滑动手势 ===================
 - (void)moveOverlayView:(UIPanGestureRecognizer *)gesture
 {
@@ -311,6 +341,11 @@
                 return;
             }
             
+            if (CMTimeGetSeconds([self.asset duration]) <= self.minLength) {
+                [self showNoSmallerTrimMessage];
+                return;
+            }
+            
             if (isRight){
                 self.rightStartPoint = [gesture locationInView:self];
                 _isDraggingRightOverlayView = YES;
@@ -326,6 +361,10 @@
         case UIGestureRecognizerStateChanged:
         {
             
+            if (CMTimeGetSeconds([self.asset duration]) <= self.minLength) {
+                return;
+            }
+            
             CGPoint point = [gesture locationInView:self];
             //------------------------------------------------------------------------------------------------------------
             // Right
@@ -340,6 +379,8 @@
                 CGFloat maxX = CMTimeGetSeconds([self.asset duration]) <= self.maxLength + 0.5 ? CGRectGetMaxX(self.frameView.frame) : CGRectGetWidth(self.frame) - self.thumbWidth;
                 if (newRightViewMidX - self.overlayWidth/2 < minX) {
                     newRightViewMidX = minX + self.overlayWidth/2;
+                    //
+                    [self showNoSmallerTrimMessage];
                 } else if (newRightViewMidX - self.overlayWidth/2 > maxX) {
                     newRightViewMidX = maxX + self.overlayWidth/2;
                 }
@@ -362,6 +403,8 @@
                     newLeftViewMidX = self.thumbWidth - self.overlayWidth + self.overlayWidth/2;
                 } else if (newLeftViewMinX + self.overlayWidth > maxWidth) {
                     newLeftViewMidX = maxWidth - self.overlayWidth / 2;
+                    //
+                    [self showNoSmallerTrimMessage];
                 }
                 
                 self.leftOverlayView.center = CGPointMake(newLeftViewMidX, self.leftOverlayView.center.y);
@@ -376,6 +419,10 @@
         }
         case UIGestureRecognizerStateEnded:
         {
+            
+            if (CMTimeGetSeconds([self.asset duration]) <= self.minLength) {
+                return;
+            }
             [self notifyDelegateOfEndEditing];
         }
             

@@ -8,14 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^ScrollCellDeleteBlcok)(NSIndexPath *indexPath);
+@protocol SNHScrollCellViewDelegate <NSObject>
+
+- (void)SNHScrollCellViewDidDeleteItem:(NSIndexPath *)indexPath;
+- (void)SNHScrollCellViewDidMoveItemAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath*)destinationIndexPath;
+
+@end
 
 @interface SNHScrollCellView : UIView
 
 @property (nonatomic, strong) NSMutableArray *datasArr;
-
 @property (nonatomic, strong) UICollectionView *collectionView;
 
-@property (nonatomic, copy) ScrollCellDeleteBlcok deleteBlock;
+@property (nonatomic, weak) id <SNHScrollCellViewDelegate > delegate;
 
 @end
