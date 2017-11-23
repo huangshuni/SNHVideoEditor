@@ -15,24 +15,6 @@
 #import "NSString+TimeConvert.h"
 #import "MBProgressHUD+SHN.h"
 
-#ifdef DEBUG
-
-#define NSLog(FORMAT, ...) fprintf(stderr, "%s:%zd\t%s\n", [[[NSString stringWithUTF8String: __FILE__] lastPathComponent] UTF8String], __LINE__, [[NSString stringWithFormat: FORMAT, ## __VA_ARGS__] UTF8String]);
-
-#else
-
-#define NSLog(FORMAT, ...) nil
-
-#endif
-
-
-#define WS(weakSelf)  __weak __typeof(&*self)weakSelf = self
-#define SCREEN_WIDTH  ([UIScreen mainScreen].bounds.size.width)
-#define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
-
-#define DocumentPath ([NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject])
-
-#define RGBColor(r,g,b,a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:a]
 
 @interface SNHVideoTrimmerController ()<SNHVideoTrimmerDelegate,SNHScrollCellViewDelegate>
 

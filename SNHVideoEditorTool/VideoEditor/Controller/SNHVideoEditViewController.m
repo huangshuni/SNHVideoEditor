@@ -12,10 +12,6 @@
 #import "SNHVideoTool.h"
 #import "MBProgressHUD+SHN.h"
 
-#define WS(weakSelf)  __weak __typeof(&*self)weakSelf = self
-#define SCREEN_WIDTH  ([UIScreen mainScreen].bounds.size.width)
-#define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
-
 @interface SNHVideoEditViewController ()
 
 @property (nonatomic, strong) AVPlayerItem *playerItem;

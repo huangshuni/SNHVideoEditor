@@ -91,6 +91,7 @@
 		2A3F12FF1F29C14400B710B6 /* SNHVideoTrimmerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SNHVideoTrimmerView.m; sourceTree = "<group>"; };
 		2A99B34B1FC676B400C4B0C0 /* SNHVideoTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SNHVideoTool.h; sourceTree = "<group>"; };
 		2A99B34C1FC676B400C4B0C0 /* SNHVideoTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SNHVideoTool.m; sourceTree = "<group>"; };
+		2A99B34E1FC6AA8E00C4B0C0 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		2AD5A7A51F6915120078499A /* NSBundle+TZImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+TZImagePicker.h"; sourceTree = "<group>"; };
 		2AD5A7A61F6915120078499A /* NSBundle+TZImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+TZImagePicker.m"; sourceTree = "<group>"; };
 		2AD5A7A71F6915120078499A /* TZAssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZAssetCell.h; sourceTree = "<group>"; };
@@ -175,6 +176,7 @@
 				2A0B93CD1F28908D009190F6 /* ViewController.h */,
 				2A0B93CE1F28908D009190F6 /* ViewController.m */,
 				2A0B93D01F28908D009190F6 /* Main.storyboard */,
+				2A99B34E1FC6AA8E00C4B0C0 /* PrefixHeader.pch */,
 				2A0B93D31F28908D009190F6 /* Assets.xcassets */,
 				2A0B93D51F28908D009190F6 /* LaunchScreen.storyboard */,
 				2A0B93D81F28908D009190F6 /* Info.plist */,
@@ -600,6 +602,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/SNHVideoEditorTool/ZYQAssetPickerController",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/SNHVideoEditorTool/PrefixHeader.pch";
 				INFOPLIST_FILE = SNHVideoEditorTool/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -617,6 +621,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/SNHVideoEditorTool/ZYQAssetPickerController",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/SNHVideoEditorTool/PrefixHeader.pch";
 				INFOPLIST_FILE = SNHVideoEditorTool/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
