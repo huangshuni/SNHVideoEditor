@@ -12,5 +12,6 @@
 
 + (MBProgressHUD *)showOnlyText:(NSString *)text view:(UIView *)view;
 
++ (MBProgressHUD *)showOnlyText:(NSString *)text view:(UIView *)view delayTime:(CGFloat)delayTime;
 
 @end

@@ -10,7 +10,7 @@
 #import "SNHThumbView.h"
 #import "SNHRulerView.h"
 #import "SNHTimerView.h"
-#import "MBProgressHUD.h"
+#import "MBProgressHUD+SHN.h"
 
 @interface HitTestView : UIView
 @property (assign, nonatomic) UIEdgeInsets hitTestEdgeInsets;
@@ -300,14 +300,9 @@
         }
     }
     if (has == NO) {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:window animated:YES];
-        hud.mode = MBProgressHUDModeText;
-        hud.label.text = @"不能再裁剪得更小了";
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideHUDForView:window animated:YES];
-        });
+          [MBProgressHUD showOnlyText:@"不能裁剪得更小了" view:nil delayTime:0.5f];
     }
-    
+  
 }
 
 

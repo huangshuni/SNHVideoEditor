@@ -1,6 +1,6 @@
 //
 //  SNHVideoTrimmerController.m
-//  NiuCam
+//  SNH
 //
 //  Created by huangshuni on 2017/7/13.
 //  Copyright © 2017年 Mirco. All rights reserved.
@@ -290,8 +290,10 @@
             model.assetUrl = outputURL;
             model.videoImage = image;
             [ws.videoPartsArr addObject:model];
-            
             ws.scrollCellView.datasArr = self.videoPartsArr;
+            
+            //动画
+            [ws.scrollCellView.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:ws.videoPartsArr.count-1 inSection:0] atScrollPosition:UICollectionViewScrollPositionRight animated:YES];
 
         } failureBlock:^(NSError *error) {
              [MBProgressHUD hideHUDForView:ws.view animated:YES];
@@ -311,6 +313,11 @@
 #pragma mark 合并视频
 - (void)mergeVideo {
 
+    if (self.videoPartsArr.count == 0) {
+        [MBProgressHUD showOnlyText:@"请先裁剪视频" view:self.view delayTime:1.0f];
+        return;
+    }
+    
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.label.text = @"请等待...";
     
@@ -341,12 +348,6 @@
             vc.urlsArr = arr;
             [ws.navigationController pushViewController:vc animated:NO];
         });
-        
-        [editor writeVideoToPhotoLibraryWithSuccess:^{
-            NSLog(@"保存成功");
-        } failure:^(NSError *error) {
-            NSLog(@"保存失败");
-        }];
        
         
     } failureBlock:^(NSError *error) {

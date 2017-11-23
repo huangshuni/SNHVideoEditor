@@ -1,6 +1,6 @@
 //
 //  SNHVideoPartCell.m
-//  NiuCam
+//  SNH
 //
 //  Created by huangshuni on 2017/7/14.
 //  Copyright © 2017年 Mirco. All rights reserved.

@@ -84,7 +84,7 @@ static NSString *SNHVideoPartCellId = @"SNHVideoPartCellId";
             self.deltaSize = CGSizeMake(location.x - cell.frame.origin.x, location.y - cell.frame.origin.y);
             self.snapView.center = cell.center;
             self.snapView.transform = CGAffineTransformMakeScale(1.1, 1.1);
-            cell.alpha = 0.0;
+            cell.contentView.alpha = 0.0;
             [self.collectionView addSubview:self.snapView];
         }
             break;
@@ -104,7 +104,7 @@ static NSString *SNHVideoPartCellId = @"SNHVideoPartCellId";
                     //移动数据源
                     [self removeObjectFrom:_currentIndexPath toIndexPath:notsureIndexPath];
                     UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:notsureIndexPath];
-                    cell.alpha = 0.0;
+                    cell.contentView.alpha = 0.0;
                     _currentIndexPath = notsureIndexPath;
                 }
             }
@@ -121,7 +121,7 @@ static NSString *SNHVideoPartCellId = @"SNHVideoPartCellId";
                     [self.snapView removeFromSuperview];
                     self.snapView = nil;
                     self.currentIndexPath = nil;
-                    cell.alpha = 1.0;
+                    cell.contentView.alpha = 1.0;
                 }];
             }
             

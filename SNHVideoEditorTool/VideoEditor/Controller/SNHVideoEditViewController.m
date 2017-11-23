@@ -9,6 +9,8 @@
 #import "SNHVideoEditViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #import "SNHVideoModel.h"
+#import "SNHVideoTool.h"
+#import "MBProgressHUD+SHN.h"
 
 #define WS(weakSelf)  __weak __typeof(&*self)weakSelf = self
 #define SCREEN_WIDTH  ([UIScreen mainScreen].bounds.size.width)
@@ -24,6 +26,8 @@
 @property (nonatomic, strong) NSObject *playbackTimeObserver;
 
 @property (nonatomic, strong) UISlider *timeSlider;
+
+@property (nonatomic, strong) UIButton *saveBtn;//保存按钮
 
 @end
 
@@ -77,6 +81,34 @@
     self.timeSlider.minimumTrackTintColor = [UIColor orangeColor];
     [self.view addSubview:self.timeSlider];
     
+    
+    self.saveBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.saveBtn.frame = CGRectMake(SCREEN_WIDTH/2 - 35, CGRectGetMaxY(self.timeSlider.frame) + 100, 70, 30);
+    self.saveBtn.backgroundColor = [UIColor orangeColor];
+    [self.saveBtn setTitle:@"保存" forState:UIControlStateNormal];
+    self.saveBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+    [self.saveBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.saveBtn addTarget:self action:@selector(saveVideo) forControlEvents:UIControlEventTouchUpInside];
+    self.saveBtn.layer.cornerRadius = 3;
+    self.saveBtn.layer.masksToBounds = YES;
+    [self.view addSubview:self.saveBtn];
+    
+}
+
+#pragma mark 保存到系统相册
+- (void)saveVideo {
+    
+    SNHVideoModel *model = self.urlsArr[0];
+    [[SNHVideoTool shared] writeVideoToPhotoLibraryWithOutputPath:model.assetUrl success:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [MBProgressHUD showOnlyText:@"保存到系统相册成功" view:self.view];
+        });
+      
+    } failure:^(NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [MBProgressHUD showOnlyText:@"保存到系统相册失败" view:self.view];
+        });
+    }];
 }
 
 

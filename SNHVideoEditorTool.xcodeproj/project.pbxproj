@@ -27,6 +27,7 @@
 		2A3F13011F29C14400B710B6 /* SNHThumbView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A3F12FA1F29C14400B710B6 /* SNHThumbView.m */; };
 		2A3F13021F29C14400B710B6 /* SNHTimerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A3F12FC1F29C14400B710B6 /* SNHTimerView.m */; };
 		2A3F13031F29C14400B710B6 /* SNHVideoTrimmerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A3F12FF1F29C14400B710B6 /* SNHVideoTrimmerView.m */; };
+		2A99B34D1FC676B400C4B0C0 /* SNHVideoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99B34C1FC676B400C4B0C0 /* SNHVideoTool.m */; };
 		2AD5A7C21F6915120078499A /* NSBundle+TZImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD5A7A61F6915120078499A /* NSBundle+TZImagePicker.m */; };
 		2AD5A7C31F6915120078499A /* TZAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD5A7A81F6915120078499A /* TZAssetCell.m */; };
 		2AD5A7C41F6915120078499A /* TZAssetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD5A7AA1F6915120078499A /* TZAssetModel.m */; };
@@ -88,6 +89,8 @@
 		2A3F12FD1F29C14400B710B6 /* SNHVideoTrimmer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNHVideoTrimmer.h; sourceTree = "<group>"; };
 		2A3F12FE1F29C14400B710B6 /* SNHVideoTrimmerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNHVideoTrimmerView.h; sourceTree = "<group>"; };
 		2A3F12FF1F29C14400B710B6 /* SNHVideoTrimmerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SNHVideoTrimmerView.m; sourceTree = "<group>"; };
+		2A99B34B1FC676B400C4B0C0 /* SNHVideoTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SNHVideoTool.h; sourceTree = "<group>"; };
+		2A99B34C1FC676B400C4B0C0 /* SNHVideoTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SNHVideoTool.m; sourceTree = "<group>"; };
 		2AD5A7A51F6915120078499A /* NSBundle+TZImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+TZImagePicker.h"; sourceTree = "<group>"; };
 		2AD5A7A61F6915120078499A /* NSBundle+TZImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+TZImagePicker.m"; sourceTree = "<group>"; };
 		2AD5A7A71F6915120078499A /* TZAssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZAssetCell.h; sourceTree = "<group>"; };
@@ -237,6 +240,8 @@
 				2A0B93EA1F2890B0009190F6 /* SNHVideoEditor.m */,
 				2A0B93EB1F2890B0009190F6 /* SNHVideoModel.h */,
 				2A0B93EC1F2890B0009190F6 /* SNHVideoModel.m */,
+				2A99B34B1FC676B400C4B0C0 /* SNHVideoTool.h */,
+				2A99B34C1FC676B400C4B0C0 /* SNHVideoTool.m */,
 			);
 			path = VideoEditorTools;
 			sourceTree = "<group>";
@@ -444,6 +449,7 @@
 				2ADD2A521F2B126A0043B954 /* ZYQAssetPickerController.m in Sources */,
 				2A3F13031F29C14400B710B6 /* SNHVideoTrimmerView.m in Sources */,
 				2AD5A7C51F6915120078499A /* TZGifPhotoPreviewController.m in Sources */,
+				2A99B34D1FC676B400C4B0C0 /* SNHVideoTool.m in Sources */,
 				2A3F13021F29C14400B710B6 /* SNHTimerView.m in Sources */,
 				2AD5A7C91F6915120078499A /* TZImagePickerController.m in Sources */,
 				2A0B94051F2890B0009190F6 /* SNHScrollCellView.m in Sources */,
